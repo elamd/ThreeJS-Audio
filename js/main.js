@@ -115,9 +115,17 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
         
         // Create array of boxes.
         var boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-        for( var i=0;i<10000; i++) {
-            var mesh = new THREE.Mesh( boxGeometry);
-            boxArray.push(mesh);
+        var yCount = -1;
+        for( var i=0;i<10000; i+=100) {
+            yCount++;
+            for( var j = 0; j < 100; j++ ) {
+                var mesh = new THREE.Mesh( boxGeometry);
+                boxArray.push(mesh);
+                mesh.position.x = j;
+                mesh.position.y = yCount;
+                mesh.position.z = 210;
+                scene.add(mesh);
+            }
         }
         window.addEventListener( 'resize', onWindowResize, false );
         document.addEventListener( 'keydown', onKeyDown, false );
